@@ -9,10 +9,6 @@ const CARD_WIDTH = 260;
 const CARD_HEIGHT = 280;
 const GRID_HEIGHT = 640;
 
-// One virtualized row renders `columnCount` product cards side by side.
-// react-window only mounts rows within (or just outside) the viewport, so
-// with ~280px rows and a 640px window, roughly 3 rows / ~10-12 cards ever
-// exist in the DOM at once, no matter how many thousand products there are.
 function CatalogRow({ index, style, products, columnCount }) {
   const start = index * columnCount;
   const rowProducts = products.slice(start, start + columnCount);
