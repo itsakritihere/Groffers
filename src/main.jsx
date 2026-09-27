@@ -1,30 +1,16 @@
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Catalog from './pages/Catalog';
-import ProductDetail from './pages/ProductDetail';
-import Checkout from './pages/Checkout';
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import App from './App.jsx'
+import { CartProvider } from './context/CartContext.jsx'
+import './index.css'
 
-export default function App() {
-  return (
-    <div className="app">
-      <Navbar />
-      <main className="app__main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route
-            path="*"
-            element={
-              <div className="app__not-found">
-                <h1>Page not found</h1>
-              </div>
-            }
-          />
-        </Routes>
-      </main>
-    </div>
-  );
-}
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <BrowserRouter>
+      <CartProvider>
+        <App />
+      </CartProvider>
+    </BrowserRouter>
+  </StrictMode>,
+)

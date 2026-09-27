@@ -1,13 +1,19 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useCartOperations } from '../hooks/useCartOperations';
+import img1 from "../images/Groffers-logo.png";
 
 export default function Navbar() {
   const { itemCount } = useCartOperations();
 
   return (
     <header className="navbar">
-      <Link to="/" className="navbar__brand">
-        Fieldstock Supply Co.
+        <Link to="/" className="navbar__brand">
+        <img
+          src={img1}
+         
+          className="navbar__logo"
+        />
+        <span>The Groffers</span>
       </Link>
       <nav className="navbar__links">
         <NavLink to="/" end className="navbar__link">

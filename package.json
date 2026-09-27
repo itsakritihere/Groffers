@@ -1,5 +1,5 @@
 {
-  "name": "nexora",
+  "name": "ecommerce-spa",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,7 +12,8 @@
   "dependencies": {
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-router-dom": "^7.18.4"
+    "react-router-dom": "^7.18.4",
+    "react-window": "^2.3.3"
   },
   "devDependencies": {
     "@types/react": "^19.2.18",

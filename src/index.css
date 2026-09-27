@@ -2,10 +2,10 @@
 
 :root {
   --ink: #1c1a16;
-  --canvas: #f2ede2;
-  --canvas-dim: #e6dfcf;
+  --canvas: #efedea;
+  --canvas-dim: #daa37c;
   --forest: #2f3d2f;
-  --rust: #b6512c;
+  --rust: #c25128;
   --line: #d8cfba;
   color-scheme: light;
 }
@@ -51,7 +51,6 @@ button {
 
 .app__main {
   flex: 1;
-  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
@@ -69,11 +68,44 @@ button {
   z-index: 10;
 }
 
+.home__hero {
+  width: 100%;
+  padding: 20px 0;
+}
+
+.home__banner-container {
+  width: 100%;
+
+  margin: 0 auto;
+  overflow: hidden;
+
+}
+
+.home__banner-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 .navbar__brand {
-  font-family: 'Fraunces', serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+   font-family: 'Fraunces', serif;
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 2.15rem;
   letter-spacing: -0.01em;
+}
+.navbar__brand span{
+  color: #982f09;
+}
+
+.navbar__logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
 }
 
 .navbar__links {
@@ -162,7 +194,6 @@ button {
 .home__category-tile:hover {
   border-color: var(--rust);
 }
-
 
 .catalog__controls {
   display: flex;

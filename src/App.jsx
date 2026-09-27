@@ -1,6 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import Catalog from './pages/Catalog';
+import ProductDetail from './pages/ProductDetail';
+import Checkout from './pages/Checkout';
 
 export default function App() {
   return (
@@ -9,6 +12,9 @@ export default function App() {
       <main className="app__main">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route
             path="*"
             element={
