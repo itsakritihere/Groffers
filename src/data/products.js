@@ -6,10 +6,11 @@ const CATEGORIES = [
   'Lighting',
   'Cordage & Rigging',
   'Footwear',
-  'Shelter',
-  'Hydration',
-  'Repair Kits',
-  'Cold Weather',
+  'Clothes',
+  'EyeWear',
+  'Home',
+  'Skincare',
+  
 ];
 
 const ADJECTIVES = [
