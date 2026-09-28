@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useProductDetail } from '../hooks/useProductFetcher';
 import { useCartOperations } from '../hooks/useCartOperations';
+import { getProductImage, localFallback } from '../data/categoryImages';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -35,9 +36,19 @@ export default function ProductDetail() {
         ← Back to catalog
       </Link>
       <div className="detail__layout">
-        <div className="detail__swatch" aria-hidden="true">
-          {product.category.slice(0, 2).toUpperCase()}
-        </div>
+       
+<div className="detail__swatch">
+  {getProductImage(product) ? (
+    <img
+      src={getProductImage(product, 800, 800)}
+      onError={localFallback(product)}
+      alt={product.name}
+      className="detail__img"
+    />
+  ) : (
+    product.category.slice(0, 2).toUpperCase()
+  )}
+</div>
         <div className="detail__info">
           <span className="detail__category">{product.category}</span>
           <h1 className="detail__name">{product.name}</h1>

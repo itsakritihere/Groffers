@@ -1,13 +1,16 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { List } from 'react-window';
 import { useProductFetcher } from '../hooks/useProductFetcher';
 import ProductCard from '../components/ProductCard';
 import { CATEGORY_LIST } from '../data/products';
 
-const CARD_WIDTH = 260;
-const CARD_HEIGHT = 280;
-const GRID_HEIGHT = 640;
+const rowHeightFor = (containerWidth) => (containerWidth < 600 ? 285 : 325);
+
+// Smaller minimum width on phones so we get 2 columns instead of 1.
+function minCardWidth(containerWidth) {
+  return containerWidth < 600 ? 150 : 220;
+}
 
 function CatalogRow({ index, style, products, columnCount }) {
   const start = index * columnCount;
@@ -16,7 +19,11 @@ function CatalogRow({ index, style, products, columnCount }) {
   return (
     <div style={style} className="catalog__row">
       {rowProducts.map((product) => (
-        <div key={product.id} className="catalog__cell">
+        <div
+          key={product.id}
+          className="catalog__cell"
+          style={{ width: `${100 / columnCount}%` }}
+        >
           <ProductCard product={product} />
         </div>
       ))}
@@ -31,11 +38,34 @@ export default function Catalog() {
 
   const { products, status, total } = useProductFetcher({ category, query });
 
-  // Compute a responsive column count from the viewport once per mount.
-  const columnCount = useMemo(() => {
-    if (typeof window === 'undefined') return 4;
-    return Math.max(1, Math.floor(window.innerWidth / CARD_WIDTH));
+  // Measure the real container (not the window) and re-measure on resize.
+  const gridWrapRef = useRef(null);
+  const [gridWidth, setGridWidth] = useState(0);
+  const [gridHeight, setGridHeight] = useState(560);
+
+  useEffect(() => {
+    const el = gridWrapRef.current;
+    if (!el) return undefined;
+
+    const update = () => {
+      setGridWidth(el.clientWidth);
+      setGridHeight(Math.max(420, window.innerHeight - 220));
+    };
+    update();
+
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    window.addEventListener('resize', update);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', update);
+    };
   }, []);
+
+  const columnCount = Math.max(
+    1,
+    Math.floor((gridWidth || 1000) / minCardWidth(gridWidth || 1000))
+  );
 
   const rowCount = Math.ceil(products.length / columnCount);
 
@@ -88,16 +118,18 @@ export default function Catalog() {
         <div className="catalog__status">No items match your search.</div>
       )}
 
-      {status === 'ready' && products.length > 0 && (
-        <List
-          rowCount={rowCount}
-          rowHeight={CARD_HEIGHT}
-          rowComponent={CatalogRow}
-          rowProps={{ products, columnCount }}
-          style={{ height: GRID_HEIGHT }}
-          className="catalog__grid"
-        />
-      )}
+      <div ref={gridWrapRef} className="catalog__grid-wrap">
+        {status === 'ready' && products.length > 0 && (
+          <List
+            rowCount={rowCount}
+            rowHeight={rowHeightFor(gridWidth || 1000)}
+            rowComponent={CatalogRow}
+            rowProps={{ products, columnCount }}
+            style={{ height: gridHeight }}
+            className="catalog__grid"
+          />
+        )}
+      </div>
     </div>
   );
 }

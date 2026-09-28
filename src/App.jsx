@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
-
+import Footer from './components/Footer';
 export default function App() {
   return (
     <div className="app">
@@ -25,6 +25,7 @@ export default function App() {
           />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }

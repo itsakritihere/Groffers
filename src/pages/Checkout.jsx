@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCartOperations } from '../hooks/useCartOperations';
+import { getProductImage, localFallback } from '../data/categoryImages';
 
 export default function Checkout() {
   const {
@@ -38,9 +39,18 @@ export default function Checkout() {
       <ul className="checkout__list">
         {items.map((item) => (
           <li key={item.id} className="checkout__item">
-            <div className="checkout__item-swatch" aria-hidden="true">
-              {item.category.slice(0, 2).toUpperCase()}
-            </div>
+            <div className="checkout__item-swatch">
+  {getProductImage(item) ? (
+    <img
+      src={getProductImage(item, 100, 100)}
+      onError={localFallback(item)}
+      alt={item.name}
+      className="checkout__item-img"
+    />
+  ) : (
+    item.category.slice(0, 2).toUpperCase()
+  )}
+</div>
             <div className="checkout__item-info">
               <Link to={`/product/${item.id}`}>{item.name}</Link>
               <span>${item.price.toFixed(2)} each</span>
