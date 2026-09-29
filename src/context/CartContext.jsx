@@ -1,7 +1,22 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 
 const CartStateContext = createContext(null);
 const CartDispatchContext = createContext(null);
+
+const STORAGE_KEY = 'zada-cart';
+
+function loadInitialState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return { items: [] };
+    const parsed = JSON.parse(saved);
+    if (!Array.isArray(parsed.items)) return { items: [] };
+    return parsed;
+  } catch (err) {
+    console.error('Could not read saved cart, starting empty:', err);
+    return { items: [] };
+  }
+}
 
 function cartReducer(state, action) {
   switch (action.type) {
@@ -51,7 +66,16 @@ function cartReducer(state, action) {
 }
 
 export function CartProvider({ children }) {
-  const [state, dispatch] = useReducer(cartReducer, { items: [] });
+  const [state, dispatch] = useReducer(cartReducer, undefined, loadInitialState);
+
+  // Save to localStorage every time the cart changes.
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (err) {
+      console.error('Could not save cart:', err);
+    }
+  }, [state]);
 
   return (
     <CartStateContext.Provider value={state}>
@@ -62,8 +86,6 @@ export function CartProvider({ children }) {
   );
 }
 
-// Two separate hooks (state vs dispatch) so components that only dispatch
-// (e.g. an "Add to cart" button) don't re-render on every cart state change.
 export function useCartState() {
   const context = useContext(CartStateContext);
   if (context === null) {

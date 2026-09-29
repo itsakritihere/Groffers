@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -5,7 +6,14 @@ import Catalog from './pages/Catalog';
 import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
 import Footer from './components/Footer';
+import { prefetchAllCategoryPhotos } from './data/categoryImages';
+
 export default function App() {
+
+  useEffect(() => {
+    prefetchAllCategoryPhotos();
+  }, []);
+
   return (
     <div className="app">
       <Navbar />

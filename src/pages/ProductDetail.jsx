@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useProductDetail } from '../hooks/useProductFetcher';
 import { useCartOperations } from '../hooks/useCartOperations';
-import { getProductImage, localFallback } from '../data/categoryImages';
+import { useProductImage } from '../hooks/useProductImage';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -10,6 +10,7 @@ export default function ProductDetail() {
   const { addItem } = useCartOperations();
   const [quantity, setQuantity] = useState(1);
   const [justAdded, setJustAdded] = useState(false);
+  const detailImage = useProductImage(product);
 
   if (status === 'loading') {
     return <div className="detail__status">Loading product…</div>;
@@ -36,23 +37,17 @@ export default function ProductDetail() {
         ← Back to catalog
       </Link>
       <div className="detail__layout">
-       
-<div className="detail__swatch">
-  {getProductImage(product) ? (
-    <img
-      src={getProductImage(product, 800, 800)}
-      onError={localFallback(product)}
-      alt={product.name}
-      className="detail__img"
-    />
-  ) : (
-    product.category.slice(0, 2).toUpperCase()
-  )}
-</div>
+        <div className="detail__swatch">
+          {detailImage ? (
+            <img src={detailImage} alt={product.name} className="detail__img" />
+          ) : (
+            product.category.slice(0, 2).toUpperCase()
+          )}
+        </div>
         <div className="detail__info">
           <span className="detail__category">{product.category}</span>
           <h1 className="detail__name">{product.name}</h1>
-          <p className="detail__price">${product.price.toFixed(2)}</p>
+          <p className="detail__price">₹{product.price.toFixed(2)}</p>
           <p className="detail__description">{product.description}</p>
           <dl className="detail__specs">
             <div>

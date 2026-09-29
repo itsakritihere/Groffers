@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useCartOperations } from '../hooks/useCartOperations';
-import { getProductImage, localFallback } from '../data/categoryImages';
+import { useProductImage } from '../hooks/useProductImage';
 
 export default function ProductCard({ product }) {
   const { addItem } = useCartOperations();
-  const image = getProductImage(product, 400, 300);
+  const image = useProductImage(product);
 
   return (
     <div className="product-card">
@@ -17,7 +17,6 @@ export default function ProductCard({ product }) {
               className="product-card__img"
               loading="lazy"
               decoding="async"
-              onError={localFallback(product)}
             />
           ) : (
             product.category.slice(0, 2).toUpperCase()
@@ -26,7 +25,7 @@ export default function ProductCard({ product }) {
         <div className="product-card__body">
           <span className="product-card__category">{product.category}</span>
           <h3 className="product-card__name">{product.name}</h3>
-          <span className="product-card__price">${product.price.toFixed(2)}</span>
+          <span className="product-card__price">₹{product.price.toFixed(2)}</span>
         </div>
       </Link>
       <button

@@ -10,7 +10,7 @@ export default function Home() {
         <div className="home__banner-container">
           <img
             src={banner}
-            alt="Groffers Festive Fashion Extravaganza - Flat 40% Off"
+            alt="Groffers Festive Fashion"
             className="home__banner-image"
           />
         </div>
@@ -52,9 +52,9 @@ export default function Home() {
                   )}
                 </div>
 
-                <div className="explore-card__body">
+                     <div className="explore-card__body">
                   <h3 className="explore-card__name">{category}</h3>
-                  <span className="explore-card__cta">Explore →</span>
+                     <span className="explore-card__cta">Explore →</span>
                 </div>
               </Link>
             );

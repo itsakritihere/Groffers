@@ -7,7 +7,7 @@ import { CATEGORY_LIST } from '../data/products';
 
 const rowHeightFor = (containerWidth) => (containerWidth < 600 ? 285 : 325);
 
-// Smaller minimum width on phones so we get 2 columns instead of 1.
+
 function minCardWidth(containerWidth) {
   return containerWidth < 600 ? 150 : 220;
 }
@@ -38,7 +38,7 @@ export default function Catalog() {
 
   const { products, status, total } = useProductFetcher({ category, query });
 
-  // Measure the real container (not the window) and re-measure on resize.
+  
   const gridWrapRef = useRef(null);
   const [gridWidth, setGridWidth] = useState(0);
   const [gridHeight, setGridHeight] = useState(560);

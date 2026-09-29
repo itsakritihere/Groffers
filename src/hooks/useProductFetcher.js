@@ -1,12 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { PRODUCTS, getProductById } from '../data/products';
 
-/**
- * useProductFetcher
- * Simulates an async catalog request (with a small artificial delay so the
- * loading state is visible) and applies category / search filtering.
- * Components stay presentational — all fetching + filtering logic lives here.
- */
+
 export function useProductFetcher({ category = 'All', query = '' } = {}) {
   const [status, setStatus] = useState('loading'); // 'loading' | 'ready' | 'error'
   const [rawProducts, setRawProducts] = useState([]);
@@ -52,10 +47,6 @@ export function useProductFetcher({ category = 'All', query = '' } = {}) {
   return { products, status, total: rawProducts.length };
 }
 
-/**
- * useProductDetail
- * Simulates fetching a single product by id.
- */
 export function useProductDetail(id) {
   const [status, setStatus] = useState('loading');
   const [product, setProduct] = useState(null);

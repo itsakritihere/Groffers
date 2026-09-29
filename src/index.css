@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap');
 
-/* ================= VARIABLES ================= */
 :root {
   --ink: #1c1a16;
   --canvas: #efedea;
@@ -11,7 +10,6 @@
   color-scheme: light;
 }
 
-/* ================= BASE ================= */
 * {
   box-sizing: border-box;
 }
@@ -49,7 +47,7 @@ button {
   cursor: pointer;
 }
 
-/* ================= LAYOUT ================= */
+
 .app {
   min-height: 100vh;
   display: flex;
@@ -63,7 +61,6 @@ button {
   padding: 2rem 1.5rem 4rem;
 }
 
-/* ================= NAVBAR ================= */
 .navbar {
   display: flex;
   align-items: center;
@@ -129,7 +126,7 @@ button {
   margin-left: 0.4rem;
 }
 
-/* ================= HOME ================= */
+
 .home__hero {
   width: 100%;
   padding: 1rem 0 2rem;
@@ -187,7 +184,7 @@ button {
   background: #253226;
 }
 
-/* ---------- Explore section ---------- */
+
 .home__explore {
   margin-top: 1rem;
 }
@@ -219,7 +216,7 @@ button {
   gap: 1.25rem;
 }
 
-/* ---------- Explore card ---------- */
+
 .explore-card {
   display: flex;
   flex-direction: column;
@@ -360,8 +357,6 @@ button {
   flex-shrink: 0;
   min-width: 0;
 }
-
-/* ================= PRODUCT CARD ================= */
 .product-card {
   background: white;
   border: 1px solid var(--line);
@@ -378,19 +373,17 @@ button {
 }
 
 .product-card__swatch {
-  height: 90px;
-  background: var(--forest);
-  color: var(--canvas);
+  height: 190px;
+  background: var(--canvas);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-family: 'Fraunces', serif;
-  font-size: 1.4rem;
+  overflow: hidden;
+  margin: 0.2rem;
 }
 
 .product-card__body {
-  padding: 0.75rem 0.85rem;
+  padding: 0.65rem 0.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -431,7 +424,7 @@ button {
   cursor: not-allowed;
 }
 
-/* ================= PRODUCT DETAIL ================= */
+
 .detail__back {
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -645,11 +638,7 @@ button {
   margin-bottom: 1rem;
 }
 
-/* ============================================================
-   RESPONSIVE (keep at the very bottom so these rules win)
-   ============================================================ */
 
-/* Tablet */
 @media (max-width: 900px) {
   .app__main {
     padding: 1.5rem 1rem 3rem;
@@ -677,8 +666,7 @@ button {
 
 /* Phone */
 @media (max-width: 600px) {
-  /* navbar (optional, keeps it from getting cramped) */
-  .navbar {
+ .navbar {
     padding: 0.75rem 1rem;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -833,7 +821,7 @@ button {
 .footer__legal a:hover {
   color: #fff;
 }
-/* ---- Product images (replace the letter swatches) ---- */
+
 .product-card__swatch,
 .detail__swatch,
 .checkout__item-swatch {
@@ -853,7 +841,7 @@ button {
   height: 150px;
 }
 
-/* Keep card text from changing the card height (catalog rows are fixed height) */
+
 .product-card__name {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -874,11 +862,7 @@ button {
   background: var(--line);
 }
 
-/* ============================================================
-   EXTRA RESPONSIVE RULES  (keep at the very bottom)
-   ============================================================ */
 
-/* Big screens: stop the page stretching edge to edge */
 @media (min-width: 1400px) {
   .app__main {
     max-width: 1400px;
@@ -927,7 +911,7 @@ button {
     gap: 1rem 1.5rem;
   }
 
-  /* checkout: the grid areas above only work if children are assigned to them */
+  
   .checkout__item-swatch {
     grid-area: swatch;
   }
@@ -1003,7 +987,7 @@ button {
     margin-left: 0;
   }
 
-  /* catalog cards: 2 per row, tighter */
+
   .catalog__cell {
     padding: 5px;
   }
