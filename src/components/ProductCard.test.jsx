@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../ProductCard';
 import { CartProvider } from '../context/CartContext';
 import { useCartOperations } from '../hooks/useCartOperations';
 import { useProductImage } from '../hooks/useProductImage';

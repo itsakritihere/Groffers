@@ -1,4 +1,3 @@
-
 const CATEGORIES = [
   'Hand Tools',
   'Cookware',
@@ -10,36 +9,36 @@ const CATEGORIES = [
   'EyeWear',
   'Home',
   'Skincare',
-  
 ];
 
 const ADJECTIVES = [
-  'Field',
-  'Trail',
-  'Basecamp',
-  'Ridge',
-  'Alloy',
-  'Canvas',
-  'Waxed',
-  'Modular',
-  'All-Weather',
-  'Compact',
+  'Essential',
+  'Classic',
+  'Premium',
+  'Urban',
+  'Explorer',
+  'Everyday',
+  'Utility',
+  'Adventure',
+  'Pro',
+  'Elite',
 ];
 
 const MATERIALS = [
-  'Titanium',
-  'Steel',
-  'Ripstop Nylon',
-  'Waxed Cotton',
+  'Stainless Steel',
+  'Premium Leather',
+  'Cotton',
+  'Polyester',
+  'Nylon',
   'Aluminum',
-  'Merino Wool',
-  'Recycled Poly',
-  'Brass',
+  'Genuine Leather',
+  'Ceramic',
 ];
 
 function seededRandom(seed) {
   let s = seed % 2147483647;
   if (s <= 0) s += 2147483646;
+
   return () => {
     s = (s * 16807) % 2147483647;
     return (s - 1) / 2147483646;
@@ -52,6 +51,7 @@ function buildProduct(id) {
   const category = CATEGORIES[id % CATEGORIES.length];
   const adjective = ADJECTIVES[(id * 7) % ADJECTIVES.length];
   const material = MATERIALS[(id * 3) % MATERIALS.length];
+
   const price = Math.round((15 + rand() * 260) * 100) / 100;
   const stock = Math.floor(rand() * 120);
 
@@ -63,16 +63,19 @@ function buildProduct(id) {
     price,
     stock,
     rating: Math.round((3 + rand() * 2) * 10) / 10,
+
     description:
-      `A ${material.toLowerCase()} ${category.toLowerCase()} built for repeated field use. ` +
-      `Part of the ${adjective} line, designed to hold up across seasons and terrain.`,
+      `A ${material.toLowerCase()} ${category.toLowerCase()} designed for everyday use. ` +
+      `Part of the ${adjective} collection, combining durability, comfort, and practical design.`,
   };
 }
 
 export const PRODUCT_COUNT = 5000;
 
-// Generated once, held in memory — stands in for a paginated/streamed API response.
-export const PRODUCTS = Array.from({ length: PRODUCT_COUNT }, (_, i) => buildProduct(i + 1));
+export const PRODUCTS = Array.from(
+  { length: PRODUCT_COUNT },
+  (_, i) => buildProduct(i + 1)
+);
 
 export function getProductById(id) {
   return PRODUCTS.find((p) => p.id === Number(id));
