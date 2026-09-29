@@ -100,7 +100,10 @@ export default function Checkout() {
           <button
             type="button"
             className="checkout__place"
-            onClick={() => setPlaced(true)}
+            onClick={() => {
+  clearCart();
+  setPlaced(true);
+}}
           >
             Place order
           </button>
