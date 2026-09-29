@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
-
+import { config } from '../config';
 const CartStateContext = createContext(null);
 const CartDispatchContext = createContext(null);
 
-const STORAGE_KEY = 'zada-cart';
+const STORAGE_KEY = config.storageKey;
 
 function loadInitialState() {
   try {

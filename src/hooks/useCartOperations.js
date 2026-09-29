@@ -1,12 +1,5 @@
 import { useMemo } from 'react';
 import { useCartState, useCartDispatch } from '../context/CartContext';
-
-/**
- * useCartOperations
- * The single place components go to read or change the cart. Wraps the raw
- * context (state + dispatch) with named operations and derived totals, so
- * no component ever dispatches a raw action or does its own math.
- */
 export function useCartOperations() {
   const { items } = useCartState();
   const dispatch = useCartDispatch();
